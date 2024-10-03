@@ -1,2 +1,2 @@
 # Ph0qu3JB
-Web based jailbreak 
+A free, open-source and online jailbreak for iOS 14.0-latest

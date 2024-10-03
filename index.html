@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake Jailbreak</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            text-align: center;
+        }
+        #logo {
+            margin-bottom: 20px;
+        }
+        #jailbreak-button {
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: white;
+            color: black;
+            border: none;
+            border-radius: 5px;
+        }
+        #status-message {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        #loading-gif {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Logo Jailbreak -->
+    <img id="logo" src="https://raw.githubusercontent.com/BananeRapeuse/Ph0qu3JB-loader/refs/heads/main/assets/IMG_2855.png" alt="Jailbreak Logo" width="150">
+
+    <!-- Bouton Jailbreak -->
+    <button id="jailbreak-button">Jailbreak</button>
+
+    <!-- Message de statut -->
+    <div id="status-message"></div>
+
+    <!-- GIF de chargement -->
+    <img id="loading-gif" src="https://media.tenor.com/_62bXB8gnzoAAAAi/loading.gif" alt="Loading" width="100">
+
+    <script>
+        // Fonction pour définir un cookie
+        function setCookie(name, value, hours) {
+            let date = new Date();
+            date.setTime(date.getTime() + (hours * 60 * 60 * 1000));
+            document.cookie = name + "=" + value + "; expires=" + date.toUTCString() + "; path=/";
+        }
+
+        // Fonction pour cacher ou afficher les éléments
+        function toggleVisibility(element, visible) {
+            element.style.display = visible ? 'block' : 'none';
+        }
+
+        // Événement lorsque l'utilisateur clique sur le bouton Jailbreak
+        document.getElementById('jailbreak-button').addEventListener('click', function() {
+            // Créer le cookie Jailbreaking
+            setCookie('Jailbreaking', 'true', 1); // Durée de 1 heure
+
+            // Changer le texte pour indiquer la préparation du jailbreak
+            const statusMessage = document.getElementById('status-message');
+            statusMessage.innerText = 'Preparing jailbreak...';
+            
+            // Désactiver le bouton
+            const jailbreakButton = document.getElementById('jailbreak-button');
+            jailbreakButton.disabled = true;
+
+            // Simuler une attente de 9 secondes
+            setTimeout(function() {
+                statusMessage.innerText = '';
+                toggleVisibility(jailbreakButton, false);
+                
+                // Afficher le GIF de chargement pendant 5 secondes
+                const loadingGif = document.getElementById('loading-gif');
+                toggleVisibility(loadingGif, true);
+                
+                setTimeout(function() {
+                    toggleVisibility(loadingGif, false);
+                    
+                    // Charger BeeOS dans la même page (en iframe cachée)
+                    const iframe = document.createElement('iframe');
+                    iframe.src = 'https://bananerapeuse.github.io/BeeOS/exploit.html';
+                    iframe.style.width = '100%';
+                    iframe.style.height = '100vh';
+                    iframe.style.border = 'none';
+                    document.body.appendChild(iframe);
+                    
+                }, 5000); // Durée du GIF
+            }, 9000); // Attente avant affichage du GIF
+        });
+    </script>
+
+</body>
+</html>
